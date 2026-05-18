@@ -1,11 +1,13 @@
 # TechTrack Analytics 📊
 
-[![ETL Pipeline](https://github.com/tu-usuario/techtrack-analytics/actions/workflows/sincronizacion_cron.yml/badge.svg)](https://github.com/tu-usuario/techtrack-analytics/actions/workflows/sincronizacion_cron.yml)
+[![ETL Pipeline](https://github.com/juanjoml2000/techtrack-analytics/actions/workflows/sincronizacion_cron.yml/badge.svg)](https://github.com/juanjoml2000/techtrack-analytics/actions/workflows/sincronizacion_cron.yml)
+[![Demo en Vivo](https://img.shields.io/badge/Demo%20en%20Vivo-Streamlit%20Cloud-FF4B4B.svg)](https://techtrack-analytics.streamlit.app/)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.30+-FF4B4B.svg)](https://streamlit.io)
 [![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E.svg)](https://supabase.com)
 
 **TechTrack Analytics** es una arquitectura de datos end-to-end diseñada para la extracción, estructuración, análisis histórico y visualización interactiva de precios de hardware tecnológico. El objetivo del sistema es dotar de inteligencia de negocio (BI) para la detección de anomalías y ventanas óptimas de compra mediante el cálculo de desviaciones sobre medias históricas.
+
+> 🔗 **Acceso a la demostración en vivo:** [https://techtrack-analytics.streamlit.app/](https://techtrack-analytics.streamlit.app/)
 
 ---
 
