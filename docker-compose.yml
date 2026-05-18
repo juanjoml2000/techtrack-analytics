@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  # Servicio para el Dashboard de Visualización (Streamlit)
+  dashboard:
+    container_name: smart-scraper-dashboard
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    restart: unless-stopped
+
+  # Servicio para ejecutar los pasos del ETL manualmente o bajo demanda
+  etl:
+    container_name: smart-scraper-etl
+    build: .
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    # Por defecto corre la extracción de prueba, pero se puede sobrescribir bajo demanda
+    command: ["python", "main.py"]
+
+
