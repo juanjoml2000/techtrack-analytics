@@ -15,7 +15,7 @@
 
 El proyecto se estructura en un pipeline ETL (Extract, Transform, Load) modular:
 
-1.  **Extracción (Extract):** Automatización de recolección de datos mediante solicitudes HTTP estructuradas (`requests` y `BeautifulSoup4`). Implementa resolución criptográfica de firmas de sesión (SHA-256) para garantizar el acceso consistente a los endpoints.
+1.  **Extracción (Extract):** Automatización de recolección de datos desde **eBay España** mediante solicitudes HTTP estructuradas (`requests` y `BeautifulSoup4`). Emplea proxies a través de **ScraperAPI** para eludir bloqueos antibot y garantizar el acceso consistente a los catálogos en la nube.
 2.  **Procesamiento (Transform):** Limpieza, normalización y cálculo de métricas financieras usando `pandas`. Incluye integración de webhooks hacia plataformas de mensajería (n8n, Telegram, Slack) para alertas en tiempo real ante caídas de precio superiores al umbral definido.
 3.  **Persistencia (Load):** Almacenamiento relacional normalizado en **PostgreSQL (Supabase)**. Se emplea un modelo estrella dimensional con separación entre el catálogo único (dimensión) y las muestras temporales de precio (hechos).
 4.  **Visualización (Dashboard):** Cuadro de mando interactivo desarrollado nativamente con `Streamlit` y `Plotly`. Permite el análisis visual de series temporales y comparativas de mercado en formato Euro (€).
@@ -48,6 +48,7 @@ El proyecto está completamente contenerizado mediante Docker para garantizar re
     SUPABASE_URL=https://tu-id-proyecto.supabase.co
     SUPABASE_KEY=tu-api-key-secreta
     N8N_WEBHOOK_URL=https://tu-webhook-n8n.com/webhook/alerta # Opcional
+    SCRAPER_API_KEY=tu-api-key-scraperapi # Necesario para proxies
     ```
 
 ### Ejecución
@@ -76,6 +77,7 @@ El repositorio incluye un flujo de trabajo de **GitHub Actions** (`.github/workf
 Para activarlo en tu fork, asegúrate de configurar los siguientes secretos en **Settings > Secrets and variables > Actions**:
 *   `SUPABASE_URL`
 *   `SUPABASE_KEY`
+*   `SCRAPER_API_KEY`
 *   `N8N_WEBHOOK_URL` (opcional)
 
 ---
