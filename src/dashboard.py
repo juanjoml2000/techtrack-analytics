@@ -64,7 +64,7 @@ def fmt_eur(v):
 # --- Layout principal ---
 
 st.title("🔍 Monitor de Precios")
-st.caption("Seguimiento de precios de hardware tecnológico · Datos en tiempo real desde MercadoLibre")
+st.caption("Seguimiento de precios de hardware tecnológico · Datos en tiempo real desde eBay España")
 
 df_prod, df_hist = cargar_datos()
 
@@ -202,7 +202,7 @@ with tab_resumen:
                     c1, c2 = st.columns(2)
                     c1.write(f"**Precio actual:** {v['Precio actual']}")
                     c2.write(f"**Media histórica:** {v['Media histórica']}")
-                    st.link_button("Ver en MercadoLibre", v["url"])
+                    st.link_button("Ver en eBay", v["url"])
         else:
             st.info("No se detectan bajadas significativas respecto a la media histórica.")
 

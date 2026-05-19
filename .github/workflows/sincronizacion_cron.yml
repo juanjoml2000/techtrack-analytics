@@ -32,7 +32,7 @@ jobs:
           N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
           SCRAPER_API_KEY: ${{ secrets.SCRAPER_API_KEY }}
           SCRAPER_QUERY: "tarjeta grafica"
-          SCRAPER_SITE_ID: "MLA"
+          SCRAPER_SITE_ID: "ES"
           SCRAPER_LIMIT: "20"
         run: |
           python main.py

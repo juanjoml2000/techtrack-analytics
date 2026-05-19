@@ -62,8 +62,7 @@ def transformar_y_analizar(
     df = pd.DataFrame(datos_crudos)
     
     # Normalización y filtrado de datos nulos o inconsistentes
-    # (Dividimos por 1000 para simular conversión ARS -> EUR y mostrar precios realistas)
-    df["precio_actual"] = pd.to_numeric(df["precio_actual"], errors="coerce") / 1000.0
+    df["precio_actual"] = pd.to_numeric(df["precio_actual"], errors="coerce")
     df = df.dropna(subset=["precio_actual", "producto_id"])
     
     registros_transformados = []
