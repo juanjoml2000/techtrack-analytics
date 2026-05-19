@@ -13,7 +13,7 @@ st.set_page_config(
     page_title="Monitor de Precios - Hardware",
     page_icon="🔍",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 # Solo unos ajustes mínimos, nada de CSS masivo
