@@ -76,7 +76,8 @@ if df_prod.empty or df_hist.empty:
 # Preparar dataset unificado
 df = pd.merge(df_hist, df_prod, on="producto_id", how="inner")
 df["precio"] = pd.to_numeric(df["precio"], errors="coerce")
-df["fecha_extraccion"] = pd.to_datetime(df["fecha_extraccion"])
+# Convertir a datetime asumiendo UTC y luego cambiar a hora peninsular española
+df["fecha_extraccion"] = pd.to_datetime(df["fecha_extraccion"], utc=True).dt.tz_convert('Europe/Madrid')
 df = df.sort_values("fecha_extraccion")
 
 # Último precio de cada producto
