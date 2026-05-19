@@ -130,8 +130,15 @@ def extraer_precios_mercadolibre(
     session = configurar_sesion(site_id)
     
     try:
-        # Petición inicial para establecer el contexto de navegación
-        response = session.get(url, timeout=15)
+        scraper_api_key = os.getenv("SCRAPER_API_KEY")
+        if scraper_api_key:
+            logger.info("Enrutando petición a través del proxy residencial de ScraperAPI...")
+            payload = {'api_key': scraper_api_key, 'url': url}
+            response = session.get('http://api.scraperapi.com', params=payload, timeout=45)
+        else:
+            # Petición directa si no hay proxy configurado
+            response = session.get(url, timeout=15)
+            
         response.raise_for_status()
         
         # Validar si se requiere confirmación de firma de sesión de seguridad
