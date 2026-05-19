@@ -7,38 +7,6 @@ from supabase import Client
 
 logger = logging.getLogger("transform")
 
-def notificar_descuento_n8n(producto: Dict[str, Any], descuento: float) -> None:
-    """
-    Sincroniza con el servicio de alertas externas para notificar caídas de precios significativas.
-    """
-    n8n_webhook_url = os.getenv("N8N_WEBHOOK_URL")
-    if not n8n_webhook_url:
-        logger.debug("N8N_WEBHOOK_URL no configurada. Omitiendo notificación externa.")
-        return
-        
-    payload = {
-        "producto_id": producto["producto_id"],
-        "nombre": producto["nombre"],
-        "precio_actual": producto["precio_actual"],
-        "descuento_porcentaje": round(descuento, 2),
-        "url_producto": producto["url_producto"],
-        "mensaje": (
-            f"🚨 ¡OFERTA DETECTADA! 🚨\n\n"
-            f"El producto *{producto['nombre']}* ha registrado una bajada del {descuento:.1f}% "
-            f"con respecto a su media histórica.\n\n"
-            f"💵 Precio Actual: {producto['precio_actual']:.2f} €\n"
-            f"🔗 Enlace: {producto['url_producto']}"
-        )
-    }
-    
-    try:
-        logger.info(f"Enviando notificación de descuento para {producto['producto_id']}...")
-        r = requests.post(n8n_webhook_url, json=payload, timeout=10)
-        r.raise_for_status()
-        logger.info("Notificación enviada correctamente.")
-    except Exception as e:
-        logger.error(f"Fallo al registrar la notificación externa: {e}")
-
 def transformar_y_analizar(
     datos_crudos: List[Dict[str, Any]],
     supabase_client: Client
@@ -99,9 +67,6 @@ def transformar_y_analizar(
                 f"Media Histórica = {precio_historico_medio:.2f} € | Variación = -{descuento:.1f}%"
             )
             
-            # Umbral de notificación establecido en el 10%
-            if descuento >= 10.0:
-                notificar_descuento_n8n(row.to_dict(), descuento)
         else:
             logger.info(f"Registro inicial de precios para el producto {producto_id}.")
             descuento = 0.0
